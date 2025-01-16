@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Mon Jeu d'Aventure</title>
+  </head>
+  <body>
+    <div style="text-align: center; margin-top: 100px;">
+      <h1>Bienvenue dans l'Aventure !</h1>
+      
+      <div style="margin: 20px;">
+        <input type="text" placeholder="Ton nom d'aventurier" id="nom">
+      </div>
+      
+      <div style="margin: 20px;">
+        <input type="password" placeholder="Ton mot de passe secret" id="motdepasse">
+      </div>
+      
+      <button onclick="seConnecter()">Commencer l'aventure !</button>
+    </div>
+
+    <script>
+      function seConnecter() {
+        var nom = document.getElementById('nom').value;
+        alert('Bienvenue ' + nom + ' dans l'aventure !');
+      }
+    </script>
+  </body>
+</html>

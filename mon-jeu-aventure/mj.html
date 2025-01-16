@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <title>Console du Maître du Jeu</title>
+    <style>
+      .console-mj {
+        display: flex;
+        margin: 20px;
+        gap: 20px;
+      }
+
+      .panneau {
+        border: 2px solid #333;
+        padding: 15px;
+        border-radius: 8px;
+        background-color: #f5f5f5;
+      }
+
+      .joueurs {
+        width: 200px;
+      }
+
+      .histoire {
+        flex-grow: 1;
+      }
+
+      .outils {
+        width: 250px;
+      }
+
+      .bouton-mj {
+        background-color: #800000;
+        color: white;
+        padding: 8px;
+        margin: 5px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      .message {
+        margin: 10px 0;
+        padding: 8px;
+        border-radius: 4px;
+      }
+
+      .message-joueur {
+        background-color: #e3e3e3;
+      }
+
+      .message-mj {
+        background-color: #ffe6e6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="console-mj">
+      <!-- Liste des joueurs -->
+      <div class="panneau joueurs">
+        <h2>Joueurs</h2>
+        <div id="liste-joueurs">
+          <div>
+            🟢 Alex (Guerrier)
+            <button onclick="voirJoueur('Alex')" class="bouton-mj">Détails</button>
+          </div>
+          <div>
+            🟢 Marie (Magicienne)
+            <button onclick="voirJoueur('Marie')" class="bouton-mj">Détails</button>
+          </div>
+          <div>
+            🔴 Lucas (Archer)
+            <button onclick="voirJoueur('Lucas')" class="bouton-mj">Détails</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zone principale de jeu -->
+      <div class="panneau histoire">
+        <h2>Déroulement de l'Histoire</h2>
+        <div id="messages" style="height: 400px; overflow-y: scroll;">
+          <div class="message message-joueur">
+            <strong>Alex :</strong> Je m'approche prudemment de la porte mystérieuse.
+          </div>
+          <div class="message message-mj">
+            <strong>MJ :</strong> La porte est couverte de runes anciennes qui brillent doucement.
+          </div>
+        </div>
+        
+        <div style="margin-top: 20px;">
+          <textarea id="reponse-mj" style="width: 100%; height: 100px;" 
+                    placeholder="Écrivez votre réponse en tant que MJ..."></textarea>
+          <button onclick="envoyerReponseMJ()" class="bouton-mj">Envoyer la réponse</button>
+        </div>
+      </div>
+
+      <!-- Outils du MJ -->
+      <div class="panneau outils">
+        <h2>Outils du MJ</h2>
+        
+        <h3>Dés magiques</h3>
+        <button onclick="lancerDe(6)" class="bouton-mj">Lancer 1d6</button>
+        <button onclick="lancerDe(20)" class="bouton-mj">Lancer 1d20</button>
+        
+        <h3>Événements rapides</h3>
+        <button onclick="evenementRapide('monstre')" class="bouton-mj">Apparition Monstre</button>
+        <button onclick="evenementRapide('tresor')" class="bouton-mj">Découverte Trésor</button>
+        <button onclick="evenementRapide('piege')" class="bouton-mj">Activation Piège</button>
+        
+        <h3>Notes secrètes</h3>
+        <textarea id="notes-mj" style="width: 100%; height: 100px;"
+                  placeholder="Notes personnelles..."></textarea>
+      </div>
+    </div>
+
+    <script>
+      function envoyerReponseMJ() {
+        var reponse = document.getElementById('reponse-mj').value;
+        var messages = document.getElementById('messages');
+        messages.innerHTML += `
+          <div class="message message-mj">
+            <strong>MJ :</strong> ${reponse}
+          </div>
+        `;
+        document.getElementById('reponse-mj').value = '';
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      function lancerDe(faces) {
+        var resultat = Math.floor(Math.random() * faces) + 1;
+        alert(`Résultat du dé ${faces} faces : ${resultat}`);
+      }
+
+      function evenementRapide(type) {
+        var evenements = {
+          monstre: "Un grondement se fait entendre... Une créature approche !",
+          tresor: "Un coffre ancien apparaît derrière des buissons.",
+          piege: "Le sol commence à trembler dangereusement..."
+        };
+        
+        var messages = document.getElementById('messages');
+        messages.innerHTML += `
+          <div class="message message-mj">
+            <strong>MJ :</strong> ${evenements[type]}
+          </div>
+        `;
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      function voirJoueur(nom) {
+        alert(`Détails du personnage de ${nom}\nPoints de vie : 100\nÉquipement : Épée, Potion, Corde\nPosition : Forêt Mystérieuse`);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<html>
+  <head>
+    <title>Ta Grande Aventure</title>
+    <style>
+      .monde-aventure {
+        width: 800px;
+        margin: 20px auto;
+        font-family: Arial;
+      }
+
+      .histoire {
+        height: 300px;
+        border: 2px solid #4CAF50;
+        padding: 10px;
+        overflow-y: scroll;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+      }
+
+      .actions {
+        background-color: #e9e9e9;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .message-joueur {
+        color: blue;
+        margin: 5px;
+      }
+
+      .message-maitre {
+        color: green;
+        margin: 5px;
+      }
+
+      .bouton-action {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="monde-aventure">
+      <h1>🗺️ Ta Grande Aventure</h1>
+      
+      <!-- Là où l'histoire s'affiche -->
+      <div class="histoire" id="histoire">
+        <div class="message-maitre">
+          Tu te trouves à l'entrée d'une forêt mystérieuse. 
+          Les arbres sont très grands et le chemin se sépare en deux...
+        </div>
+      </div>
+
+      <!-- Les actions que tu peux faire -->
+      <div class="actions">
+        <h3>Que veux-tu faire ?</h3>
+        
+        <!-- Actions rapides -->
+        <button class="bouton-action" onclick="fairAction('explorer')">Explorer les alentours</button>
+        <button class="bouton-action" onclick="fairAction('parler')">Parler à quelqu'un</button>
+        <button class="bouton-action" onclick="fairAction('regarder')">Regarder dans ton sac</button>
+
+        <!-- Zone pour écrire tes propres actions -->
+        <div style="margin-top: 20px;">
+          <input type="text" id="action-perso" placeholder="Écris ce que tu veux faire..." style="width: 300px; padding: 5px;">
+          <button class="bouton-action" onclick="actionPersonnalisee()">Faire cette action</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function fairAction(type) {
+        var histoire = document.getElementById('histoire');
+        var actionJoueur = '';
+        var reponse = '';
+
+        if (type === 'explorer') {
+          actionJoueur = "Je regarde autour de moi avec attention...";
+          reponse = "Tu découvres des empreintes étranges au sol et des fruits brillants dans les arbres !";
+        } else if (type === 'parler') {
+          actionJoueur = "Y a-t-il quelqu'un ?";
+          reponse = "Tu entends un petit rire derrière un buisson... Un lutin apparaît !";
+        } else if (type === 'regarder') {
+          actionJoueur = "Je regarde dans mon sac...";
+          reponse = "Dans ton sac, tu as : une corde magique, une petite lanterne et un bout de pain.";
+        }
+
+        histoire.innerHTML += `<div class="message-joueur">👤 ${actionJoueur}</div>`;
+        histoire.innerHTML += `<div class="message-maitre">🎲 ${reponse}</div>`;
+        
+        // Faire défiler vers le bas
+        histoire.scrollTop = histoire.scrollHeight;
+      }
+
+      function actionPersonnalisee() {
+        var action = document.getElementById('action-perso').value;
+        var histoire = document.getElementById('histoire');
+
+        histoire.innerHTML += `<div class="message-joueur">👤 ${action}</div>`;
+        histoire.innerHTML += `<div class="message-maitre">🎲 Le maître du jeu réfléchit à ce qui va se passer...</div>`;
+        
+        document.getElementById('action-perso').value = '';
+        histoire.scrollTop = histoire.scrollHeight;
+      }
+    </script>
+  </body>
+</html>

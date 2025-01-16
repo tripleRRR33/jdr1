@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <title>Crée ton Aventurier !</title>
+    <style>
+      .carte-personnage {
+        background-color: #f0f0ff;
+        padding: 20px;
+        margin: 20px auto;
+        width: 300px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px blue;
+      }
+      
+      .bouton-choix {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .selection {
+        margin: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="carte-personnage">
+      <h1>Crée ton Héros !</h1>
+      
+      <div class="selection">
+        <label>Ton nom de héros :</label>
+        <input type="text" id="nom-heros">
+      </div>
+
+      <div class="selection">
+        <label>Choisis ta classe :</label>
+        <select id="classe">
+          <option>Guerrier Courageux</option>
+          <option>Magicien Sage</option>
+          <option>Archer Agile</option>
+          <option>Guérisseur Gentil</option>
+        </select>
+      </div>
+
+      <div class="selection">
+        <label>Ta couleur préférée :</label>
+        <select id="couleur">
+          <option>Rouge</option>
+          <option>Bleu</option>
+          <option>Vert</option>
+          <option>Violet</option>
+        </select>
+      </div>
+
+      <div class="selection">
+        <label>Ton animal magique :</label>
+        <select id="animal">
+          <option>Dragon</option>
+          <option>Phénix</option>
+          <option>Licorne</option>
+          <option>Loup</option>
+        </select>
+      </div>
+
+      <button class="bouton-choix" onclick="creerPersonnage()">Créer mon héros !</button>
+
+      <div id="resultat"></div>
+    </div>
+
+    <script>
+      function creerPersonnage() {
+        var nom = document.getElementById('nom-heros').value;
+        var classe = document.getElementById('classe').value;
+        var couleur = document.getElementById('couleur').value;
+        var animal = document.getElementById('animal').value;
+
+        var message = "🎉 Félicitations ! Tu as créé : " + nom + "\n" +
+                     "⚔️ Classe : " + classe + "\n" +
+                     "🎨 Couleur : " + couleur + "\n" +
+                     "🐾 Animal : " + animal;
+
+        document.getElementById('resultat').innerHTML = message.replace(/\n/g, '<br>');
+      }
+    </script>
+  </body>
+</html>
